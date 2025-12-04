@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1764447284 source:c:\users\pc\documents\s5\algo-java\c\project\partiec\main.c
+	"vol.h"
+	<stdio.h>
+	<stdlib.h>
+
+1764340148 c:\users\pc\documents\s5\algo-java\c\project\partiec\vol.h
+	<stdio.h>
+
+1764340758 source:c:\users\pc\documents\s5\algo-java\c\project\partiec\vol.c
+	"vol.h"
+	<stdlib.h>
+	<string.h>
+
