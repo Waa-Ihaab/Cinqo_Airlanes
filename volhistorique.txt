@@ -1,0 +1,24 @@
+-----------------------------------
+Vol : AF1002
+Trajet : Paris (France) -> Barcelona (Espagne)
+Heure depart  : 08:00
+Heure arrivee : 10:00
+Pris le : 2025-12-04 à 15:21:41
+-----------------------------------
+
+-----------------------------------
+Vol : IB1003
+Trajet : Barcelona (Espagne) -> Nador (Maroc)
+Heure depart  : 12:00
+Heure arrivee : 13:30
+Pris le : 2025-12-04 à 15:21:41
+-----------------------------------
+
+-----------------------------------
+Vol : AF1050
+Trajet : Paris (France) -> Tokyo (Japon)
+Heure depart  : 13:00
+Heure arrivee : 08:00
+Pris le : 2025-12-04 à 15:44:18
+-----------------------------------
+

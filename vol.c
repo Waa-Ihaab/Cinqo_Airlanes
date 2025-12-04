@@ -1,6 +1,7 @@
 #include "vol.h"
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 int estVolValide(Vol v) {
     if (strlen(v.ville_depart) == 0 || strlen(v.ville_arrivee) == 0 || strlen(v.pays_depart) == 0 || strlen(v.pays_arrivee) == 0)
@@ -172,3 +173,36 @@ void volCorrespondances(Vol *vols, int nbVols, char *depart, char *arrivee) {
 
     printf("Billet genere : %s\n", filename);
 }
+
+
+// i want to create a function that writes the flight information in a pdf file 
+// if the file already exists we write at the end of the file if not we create it
+void writeInfile(Vol v, const char *filename) {
+    FILE *f = fopen(filename, "a");
+    time_t t = time(NULL);
+    struct tm *tm = localtime(&t);
+    if (!f) {
+        printf("Erreur creation fichier pdf.\n");
+        return;
+    }
+    fprintf(f, "-----------------------------------\n");
+    fprintf(f, "Vol : %s\n", v.id);
+    fprintf(f, "Trajet : %s (%s) -> %s (%s)\n",
+            v.ville_depart, v.pays_depart,
+            v.ville_arrivee, v.pays_arrivee);
+    fprintf(f, "Heure depart  : %s\n", v.heure_depart);
+    fprintf(f, "Heure arrivee : %s\n", v.heure_arrivee);
+
+    fprintf(f, "Pris le : %04d-%02d-%02d à %02d:%02d:%02d\n",
+            tm->tm_year + 1900,
+            tm->tm_mon + 1,
+            tm->tm_mday,
+            tm->tm_hour,
+            tm->tm_min,
+            tm->tm_sec);
+
+    fprintf(f, "-----------------------------------\n\n");
+    fclose(f);
+}
+
+

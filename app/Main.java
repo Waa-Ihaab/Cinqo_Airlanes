@@ -14,7 +14,8 @@ public class Main {
             System.out.println("1. Afficher tous les vols");
             System.out.println("2. Vol direct");
             System.out.println("3. Vol correspondance");
-            System.out.println("4. Quitter");
+            System.out.println("4. Exporter historique");
+            System.out.println("5. Quitter"); 
             System.out.print("Choix : ");
 
             
@@ -30,18 +31,53 @@ public class Main {
                 String d = sc.nextLine();
                 System.out.print("Arrivee : ");
                 String a = sc.nextLine();
-                service.volDirect(d, a);
+
+                boolean trouve = service.volDirect(d, a);
+
+                if (trouve) {
+                    System.out.print("Avez-vous pris ce vol ? (O/N) : ");
+                    String rep = sc.nextLine();
+
+                    if (rep.equalsIgnoreCase("O") || rep.equalsIgnoreCase("Y")) {
+
+                        // 🔥 CORRECTION ICI
+                        service.writeDirect(d, a);
+
+                        System.out.println("Vol enregistré dans volhistorique.txt !");
+                    }
+                }
             }
+
 
             else if (choix == 3) {
                 System.out.print("Depart : ");
                 String d = sc.nextLine();
                 System.out.print("Arrivee : ");
                 String a = sc.nextLine();
-                service.volCorrespondance(d, a);
+
+                boolean trouve = service.volCorrespondance(d, a);
+
+                if (trouve) {
+                    System.out.print("Avez-vous pris cette correspondance ? (O/N) : ");
+                    String rep = sc.nextLine();
+
+                    if (rep.equalsIgnoreCase("O") || rep.equalsIgnoreCase("Y")) {
+
+                        // 🔥 correspondance = bon choix
+                        service.writeCorrespondance(d, a);
+
+                        System.out.println("Correspondance enregistrée !");
+                    }
+                }
             }
 
+
+
             else if (choix == 4) {
+                service.exportHistorique();
+            }
+                
+            else if (choix == 5) {
                 System.out.println("Adios !");
                 break;
             }
@@ -52,5 +88,8 @@ public class Main {
         }
 
         sc.close();
+    System.out.println("Répertoire courant Java : " + System.getProperty("user.dir"));
+
     }
+    
 }
