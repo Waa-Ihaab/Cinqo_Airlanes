@@ -26,40 +26,40 @@ public class VolService {
     public boolean volCorrespondance(String depart, String arrivee) {
         String output = lancerCommande("CORRESP", depart, arrivee);
         System.out.println(output);
-
         return output.contains("Vol avec correspondance");
     }
 
 
-
+    //.\main.exe WRITE_DIRECT depart arrivee
     public void writeDirect(String depart, String arrivee) {
         lancerCommande("WRITE_DIRECT", depart, arrivee);
     }
 
 
-
+    //.\main.exe WRITE_CORRESP depart arrivee
     public void writeCorrespondance(String depart, String arrivee) {
         lancerCommande("WRITE_CORRESP", depart, arrivee);
     }
 
 
-
+    //export txt to csv
     public void exportHistorique() {
          try {
+            
             BufferedReader reader = new BufferedReader(new java.io.FileReader("volhistorique.txt"));
             java.io.PrintWriter writer = new java.io.PrintWriter("volhistorique.csv");
-
+            //tete csv
             writer.println("id,depart,pays_depart,arrivee,pays_arrivee,heure_depart,heure_arrivee,prise_le");
-
+        
             String line;
             String id="", depart="", paysDepart="", arrivee="", paysArrivee="", hDepart="", hArrivee="", priseLe="";
-
+        
             while ((line = reader.readLine()) != null) {
 
                 if (line.startsWith("Vol :")) {
                     id = line.substring(6).trim();
                 }
-
+                    
                 if (line.startsWith("Trajet :")) {
                     
                     String trajet = line.substring(8).trim();
@@ -101,6 +101,8 @@ public class VolService {
         }
     }
 
+
+    
     // lance commande externe
         private String lancerCommande(String... args) {
         StringBuilder output = new StringBuilder();

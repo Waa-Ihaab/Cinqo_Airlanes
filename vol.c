@@ -24,7 +24,7 @@ Vol* volValid(FILE *f, int *nbVols) {
     Vol *tableau = malloc(capacite * sizeof(Vol));
     if (!tableau) return NULL;
 
-    fgets(ligne, taille_ligne, f);
+    fgets(ligne, taille_ligne, f);//parcourir les lignes du fichier
 
     while (fgets(ligne, taille_ligne, f)) {
 
@@ -40,15 +40,18 @@ Vol* volValid(FILE *f, int *nbVols) {
 
         if (compteur >= capacite) {
             capacite *= 2;
-            Vol *tmp = realloc(tableau, capacite * sizeof(Vol));
-            if (!tmp) return NULL;
-            tableau = tmp;
+            Vol *tmp = realloc(tableau, capacite * sizeof(Vol));//agrandir la memoire
+            if (!tmp) {
+                free(tableau); //liberer la memoire avant de retourner NULL
+                return NULL; //echec realloc
+            }
+            tableau = tmp; //mettre a jour le pointeur
         }
 
-        tableau[compteur++] = v;
+        tableau[compteur++] = v; //ajouter le vol valide au tableau
     }
 
-    *nbVols = compteur;
+    *nbVols = compteur; //mettre a jour le nombre de vols valides
     return tableau;
 }
 
@@ -65,7 +68,7 @@ void afficherVols(Vol *vols, int nbVols) {
 }
 
 
-
+//HH::MM to total minutes pour comparison 
 int heureVersMinutes(const char *heure) {
     int h, m;
     if (sscanf(heure, "%d:%d", &h, &m) != 2)
@@ -146,39 +149,10 @@ void volCorrespondances(Vol *vols, int nbVols, char *depart, char *arrivee) {
         if (!trouve) {
             printf("Aucune correspondance trouvee.\n");
         }
-    }
-    
-    void billet(Vol v, const char *filename) {
-    FILE *f = fopen(filename, "w");
-
-    if (!f) {
-        printf("Erreur creation fichier billet.\n");
-        return;
-    }
-
-    fprintf(f, "      *** Cinqo Airlines ***      \n");
-
-    fprintf(f, "Vol : %s\n", v.id);
-    fprintf(f, "Trajet : %s (%s) -> %s (%s)\n",
-            v.ville_depart, v.pays_depart,
-            v.ville_arrivee, v.pays_arrivee);
-
-    fprintf(f, "Heure depart  : %s\n", v.heure_depart);
-    fprintf(f, "Heure arrivee : %s\n", v.heure_arrivee);
-
-    fprintf(f, "\n      *** Cinqo Airlines ***      \n");
-    fprintf(f, "MERCI POUR VOTRE CONFIANCE\n");
-
-    fclose(f);
-
-    printf("Billet genere : %s\n", filename);
 }
 
-
-// i want to create a function that writes the flight information in a pdf file 
-// if the file already exists we write at the end of the file if not we create it
 void writeInfile(Vol v, const char *filename) {
-    FILE *f = fopen(filename, "a");
+    FILE *f = fopen(filename, "a"); // a == append r == read w == write
     time_t t = time(NULL);
     struct tm *tm = localtime(&t);
     if (!f) {

@@ -22,3 +22,27 @@ Heure arrivee : 08:00
 Pris le : 2025-12-04 à 15:44:18
 -----------------------------------
 
+-----------------------------------
+Vol : AF1021
+Trajet : Paris (France) -> Nice (France)
+Heure depart  : 07:00
+Heure arrivee : 08:25
+Pris le : 2025-12-04 à 18:00:11
+-----------------------------------
+
+-----------------------------------
+Vol : AF1040
+Trajet : Paris (France) -> Nice (France)
+Heure depart  : 07:00
+Heure arrivee : 08:25
+Pris le : 2025-12-04 à 18:00:11
+-----------------------------------
+
+-----------------------------------
+Vol : AF1001
+Trajet : Paris (France) -> Nador (Maroc)
+Heure depart  : 09:00
+Heure arrivee : 11:15
+Pris le : 2025-12-05 à 07:14:05
+-----------------------------------
+

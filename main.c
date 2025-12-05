@@ -46,27 +46,6 @@ int main(int argc, char *argv[]) {
     }
 
 
-
-
-
-    else if (strcmp(argv[1], "TICKET") == 0 && argc == 4) {
-
-    // Rechercher un vol direct exact
-    for (int i = 0; i < nbVols; i++) {
-        if (strcmp(vols[i].ville_depart, argv[2]) == 0 &&
-            strcmp(vols[i].ville_arrivee, argv[3]) == 0) {
-
-            billet(vols[i], "billet.txt");
-            printf("Billet genere : billet.txt\n");
-            free(vols);
-            return 0;
-        }
-    }
-
-    printf("Aucun vol direct trouve pour generer un billet.\n");
-}
-    
-
     //ecrire dans le fichier
     else if (strcmp(argv[1], "WRITE_DIRECT") == 0 && argc == 4) {
         const char *filename = "volhistorique.txt";
@@ -77,12 +56,16 @@ int main(int argc, char *argv[]) {
 
                 writeInfile(vols[i], filename);
                 printf("Vol direct ajouté.\n");
+                break;  // Sortir après le premier vol trouvé
             }
         }
+        
+        free(vols);  // Libérer la mémoire
+        return 0;
     }
 
         
-    else if (strcmp(argv[1], "WRITE_CORRESP") == 0 && argc == 4) {
+    else if (strcmp(argv[1], "WRITE_CORRESP") == 0) {
 
         char *depart = argv[2];
         char *arrivee = argv[3];
@@ -99,7 +82,7 @@ int main(int argc, char *argv[]) {
                     writeInfile(vols[j], filename);
 
                     printf("Correspondance enregistrée dans %s.\n", filename);
-                    free(vols);
+                    free(vols);  // ⚠️ AJOUTER ICI
                     return 0;
                 }
             }
@@ -109,8 +92,6 @@ int main(int argc, char *argv[]) {
         free(vols);
         return 0;
     }
-
-
 
     else {
         printf("Commande inconnue ou arguments manquants.\n");

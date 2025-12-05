@@ -25,7 +25,6 @@ void volDirect(Vol *vols, int nbVols, char *depart, char *arrivee);
 void volCorrespondances(Vol *vols, int nbVols, char *depart, char *arrivee);
 
 
-void billet(Vol vol, const char *filename);
 
 void writeInfile(Vol v, const char *filename);
 
