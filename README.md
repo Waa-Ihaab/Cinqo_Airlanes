@@ -1,107 +1,197 @@
-# Cinqo_Airlanes
+# ✈️ Cinqo_Airlanes — Flight Management System
 
-[![UIcon Java](https://img.shields.io/badge/UIcon-Java-blue.svg)](https://github.com/)
-[![UIcon C](https://img.shields.io/badge/UIcon-C-lightgrey.svg)](https://github.com/)
-[![Airlanes](https://img.shields.io/badge/Airlanes-Module-brightgreen.svg)](https://github.com/)
+[![UIcon Java](https://img.shields.io/badge/UIcon-Java-blue?logo=java&logoColor=white)](https://github.com/Waa-Ihaab/Cinqo_Airlanes)
+[![UIcon C](https://img.shields.io/badge/UIcon-C-lightgrey?logo=c&logoColor=white)](https://github.com/Waa-Ihaab/Cinqo_Airlanes)
+[![Airlanes](https://img.shields.io/badge/Airlanes-Module-brightgreen)](https://github.com/Waa-Ihaab/Cinqo_Airlanes)
+[![Licence](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-Description
------------
-Cinqo_Airlanes est un projet qui regroupe des composants d'interface utilisateur (UIcon) implémentés en Java et en C ainsi qu'un module "Airlanes" pour la gestion de fonctionnalités liées aux lignes aériennes. Ce dépôt sert de point central pour le code source, la documentation et les exemples d'intégration.
+Cinqo_Airlanes est un système de gestion de vols hybride : le moteur métier est développé en C (application console/CLI) et l'interface utilisateur interactive est fournie en Java. Le système permet de lister les vols, rechercher des vols directs et correspondances, générer des billets et tenir un historique des réservations.
 
-Principales fonctionnalités
----------------------------
-- UIcon (Java) : composants UI réutilisables pour applications Java (Swing / JavaFX selon implémentation).
-- UIcon (C) : bibliothèques légères pour interfaces graphiques embarquées ou consoles.
-- Airlanes : logique métier et utilitaires pour la gestion des lignes aériennes (itinéraires, vols, réservations, etc.).
-- Exemples d'intégration et scripts de build pour compiler/run les composants.
+---
 
-Structure du dépôt (suggestion)
--------------------------------
-- /uicon-java/      -> code source Java (packages, exemples, README spécifique)
-- /uicon-c/         -> code source C (headers, sources, Makefile/CMake)
-- /airlanes/        -> module Airlanes (API, services, exemples)
-- /docs/            -> documentation, diagrammes et spécifications
-- /examples/        -> projets d'exemple montrant l'intégration des composants
-- README.md         -> ce fichier
+## 📋 Fonctionnalités
+- Listage complet des vols disponibles (depuis data.csv)
+- Recherche de vol direct entre deux villes
+- Recherche de correspondance (une escale) si aucun vol direct n'existe
+- Génération d'un billet imprimable (billet.txt)
+- Enregistrement et export de l'historique des vols en CSV
+- Validation basique des données (formats, champs requis)
 
-Installation et construction
----------------------------
+---
 
-Prérequis généraux
-- Git
-- JDK 11+ si vous utilisez la version Java
-- gcc/clang et make ou CMake pour la partie C
-- Outils de build optionnels : Maven/Gradle (Java), CMake (C)
+## 🛠️ Stack technique
+- Moteur core : C (main.c, vol.c, vol.h)
+- Interface utilisateur : Java (app/Main.java, service/VolService.java)
+- Stockage des données : fichiers CSV / TXT
+- Build C : GCC (Code::Blocks compatible)
+- Build Java : JDK 8+
 
-UIcon (Java)
-- Aller dans le dossier uicon-java :
-  - Si le projet utilise Maven :
-    - mvn clean install
-  - Si le projet utilise Gradle :
-    - ./gradlew build
-- Exécuter les exemples (si fournis) avec : java -jar target/nom-du-jar.jar ou via Gradle run
+---
 
-UIcon (C)
-- Aller dans le dossier uicon-c :
-  - Avec Makefile :
-    - make
-    - sudo make install (optionnel)
-  - Avec CMake :
-    - mkdir build && cd build
-    - cmake ..
-    - make
-- Les bibliothèques compilées seront dans build/ ou lib/ selon configuration.
+## 📁 Structure du dépôt (version actuelle)
+Cinqo_Airlanes/
+├── main.c              # Entrée C (application CLI)  
+├── vol.c               # Logique des vols  
+├── vol.h               # Structures et prototypes  
+├── data.csv            # Base de vols  
+├── volhistorique.txt   # Historique des réservations (texte)  
+├── volhistorique.csv   # Historique exporté (CSV)  
+├── billet.txt          # Exemple / sortie billet généré  
+├── app/  
+│   └── Main.java       # Interface Java (menu interactif)  
+├── service/  
+│   └── VolService.java # Service Java qui appelle l'exécutable C  
+├── bin/                # Executables (recommandé)  
+└── obj/                # Fichiers objets (C)
 
-Airlanes
-- Suivre le README spécifique dans /airlanes pour les dépendances et la compilation.
-- Éventuellement intégrer les bibliothèques UIcon (Java/C) en liant ou en important les jars.
+> Remarque : adaptez les chemins de compilation ci‑dessous selon vos conventions (par ex. output dans `bin/`).
 
-Utilisation (exemples)
-----------------------
-- Consulter /examples/ pour des démonstrations d'intégration.
-- Exemple rapide (Java) :
-  - Importer uicon-java comme dépendance dans votre projet (local maven repo ou jar).
-  - Initialiser et utiliser les composants UI fournis.
-- Exemple rapide (C) :
-  - Inclure les headers depuis uicon-c/include et lier la lib uicon-c lors de la compilation.
+---
 
-Tests
------
-- Exécuter les tests unitaires Java : mvn test ou ./gradlew test
-- Pour C, exécuter les tests fournis dans /uicon-c/tests ou via le framework choisi (CTest, Unity, etc.)
+## 📦 Prérequis
+- GCC (ou un équivalent compatible) pour compiler l'application C  
+- JDK 8+ pour compiler/éxécuter l'interface Java  
+- (Optionnel) Code::Blocks si vous préférez un IDE pour le projet C
 
-Contribuer
-----------
-Les contributions sont bienvenues. Processus recommandé :
-1. Fork du dépôt.
-2. Créer une branche feature/bugfix descriptive.
-3. Soumettre une Pull Request avec description claire et tests si possible.
-4. Respecter le format de commit et les conventions de code du projet.
+---
 
-Guidelines spécifiques :
-- Documenter toute nouvelle API dans /docs/.
-- Ajouter des exemples dans /examples/ pour montrer l'usage.
-- Pour changements majeurs, ouvrir une issue décrivant le besoin avant d'implémenter.
+## 🔧 Compilation & installation
 
-Roadmap (idées)
----------------
-- Compléter les implémentations UIcon pour JavaFX et Qt/Cross-platform.
-- Ajouter support d'internationalisation dans Airlanes.
-- Intégration continue (GitHub Actions) pour build/test automatique.
-- Packager des artefacts (jars et libs) pour distribution.
+### Compiler l'application C (ligne de commande)
+Recommandé : placer l'exécutable dans `bin/`.
+```bash
+# Depuis la racine du dépôt
+gcc -o bin/app.exe main.c vol.c
+# ou sur Linux sans .exe
+gcc -o bin/app main.c vol.c
+```
+Vous pouvez aussi ouvrir le projet Code::Blocks (.cbp) si fourni et construire depuis l'IDE.
 
-Licence
--------
-Indiquer ici la licence du projet (ex : MIT, Apache-2.0). Si non défini, ajouter un fichier LICENSE à la racine.
+### Compiler l'interface Java
+```bash
+# Créez un dossier de classes et compilez
+mkdir -p bin/classes
+javac -d bin/classes app/Main.java service/VolService.java
+```
+Pour exécuter depuis la racine :
+```bash
+java -cp bin/classes app.Main
+```
 
-Contact / Auteurs
------------------
-- Mainteneur principal : Waa-Ihaab
-- Pour les contributions ou questions, ouvrir une issue sur le dépôt.
+---
 
-Remarques finales
------------------
-Ce README est une base. Si tu veux, je peux :
-- Adapter les instructions de build précisément au contenu actuel du dépôt (en inspectant les dossiers uicon-java, uicon-c et airlanes).
-- Générer des badges dynamiques (build, coverage) et un template de CONTRIBUTING.md.
-- Créer et pousser directement ce README.md dans le dépôt si tu me le demandes.
+## 🚀 Utilisation
+
+### Interface CLI (exécutable C)
+Exemples d'usage (assurez‑vous que `bin/app` ou `bin/app.exe` est exécutable) :
+```bash
+# Lister tous les vols
+./bin/app LIST
+
+# Rechercher un vol direct Paris -> Nador
+./bin/app DIRECT Paris Nador
+
+# Rechercher une correspondance Paris -> Nador (une escale)
+./bin/app CORRESP Paris Nador
+
+# Générer un billet pour un vol direct
+./bin/app TICKET Paris Nador
+
+# Enregistrer un vol direct dans l'historique
+./bin/app WRITE_DIRECT Paris Nador
+
+# Enregistrer une correspondance dans l'historique
+./bin/app WRITE_CORRESP Paris Nador
+```
+
+### Interface interactive (Java)
+Lancez le menu Java :
+```bash
+java -cp bin/classes app.Main
+```
+Le menu interactif fournit des options :
+1. Afficher tous les vols  
+2. Vol direct  
+3. Vol correspondance  
+4. Exporter historique  
+5. Quitter
+
+Le service Java (`service/VolService.java`) appelle l'exécutable C pour déléguer le traitement métier (pattern simple « UI -> service -> exécutable C »).
+
+---
+
+## 📄 Formats des données
+
+### Fichier `data.csv` (base de vols)
+Champs :
+- id — identifiant du vol (ex : AF1001)  
+- pays_depart — pays de départ  
+- ville_depart — ville de départ  
+- pays_arrivee — pays d'arrivée  
+- ville_arrivee — ville d'arrivée  
+- heure_depart — heure départ (HH:MM)  
+- heure_arrivee — heure arrivée (HH:MM)
+
+Exemple :
+```csv
+id,pays_depart,ville_depart,pays_arrivee,ville_arrivee,heure_depart,heure_arrivee
+AF1001,France,Paris,Maroc,Nador,09:00,11:15
+AF1002,France,Paris,Espagne,Barcelona,08:00,10:00
+```
+
+### Fichier d'historique exporté `volhistorique.csv`
+Format :
+```csv
+id,depart,pays_depart,arrivee,pays_arrivee,heure_depart,heure_arrivee,prise_le
+AF1002,Paris,France,Barcelona,Espagne,08:00,10:00,2025-12-04 15:21:41
+```
+
+### Billet généré (`billet.txt`)
+Exemple de sortie :
+```
+*** Cinqo Airlines ***
+Vol : AF1001
+Trajet : Paris (France) -> Nador (Maroc)
+Heure depart  : 09:00
+Heure arrivee : 11:15
+*** Cinqo Airlines ***
+MERCI POUR VOTRE CONFIANCE
+```
+
+---
+
+## 🔍 Règles de validation des vols
+Le système filtre les entrées invalides selon :
+- Tous les champs villes/pays doivent être renseignés  
+- Ville de départ ≠ ville d'arrivée  
+- Aucun caractère placeholder (« ? ») dans les champs obligatoires  
+- Format d'heure valide (HH:MM)
+
+---
+
+## ✈️ Trajets supportés (exemples)
+Le jeu de données couvre notamment :
+- France : Paris, Lyon, Marseille, Nice, Toulouse, Bordeaux, Lille, Nantes, Strasbourg  
+- Espagne : Barcelona, Madrid, Valencia, Seville  
+- Maroc : Nador, Casablanca, Rabat, Marrakech, Agadir, Tanger, Fes  
+- International : Rome, Berlin, New York, Tokyo
+
+---
+
+## ✅ Bonnes pratiques & recommandations
+- Stocker `bin/app` dans `.gitignore` si vous ne souhaitez pas versionner les binaires.  
+- Utiliser des sorties date/heure au format ISO pour l'historique (ex. 2025-12-04T15:21:41) si vous prévoyez des traitements automatisés.  
+- Ajouter des tests unitaires pour la logique C (stratégie : fonctions pures testables) et des tests d'intégration pour l'interface Java.  
+- Prévoir un workflow GitHub Actions pour compilation et tests automatiques.
+
+---
+
+## 🤝 Contribuer
+Contribuer est le bienvenu :
+1. Ouvrez une issue pour discuter des fonctionnalités majeures.  
+2. Forkez, créez une branche descriptive (feature/... | fix/...) et soumettez une Pull Request.  
+3. Ajoutez des tests et mettez à jour la documentation (`docs/`).
+
+---
+
+Cinqo_Airlanes — Votre voyage commence ici. ✈️
